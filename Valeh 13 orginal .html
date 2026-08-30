@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<title>گروه رسانه‌ای فجر ۱۲</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --text:#151923;
+    --muted:#747b89;
+    --line:#d9dde5;
+    --accent:#675cff;
+    --accent2:#8b5cf6;
+    --danger:#ef4444;
+    --shadow:0 12px 35px rgba(20,25,40,.09);
+}
+
+body.dark{
+    --bg:#0b0e14;
+    --card:#151922;
+    --text:#f5f7ff;
+    --muted:#9ca3af;
+    --line:#292e3a;
+    --shadow:0 12px 35px rgba(0,0,0,.35);
+}
+
+body{
+    font-family:'Vazirmatn',Tahoma,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    transition:.3s;
+    padding:15px;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+button,input,textarea{
+    font-family:inherit;
+}
+button{
+    cursor:pointer;
+    border:0;
+}
+
+/* ===== پس‌زمینه گرافیکی متحرک ===== */
+#particles-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ===== کانتینر اصلی ===== */
+.container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    background: rgba(5, 8, 22, 0.88);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 35px;
+    padding: 20px 18px 25px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ===== هدر ===== */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    position: relative;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #a5f3fc, #7dd3fc, #38bdf8, #818cf8);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 4s ease-in-out infinite;
+    letter-spacing: 0px;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ===== دکمه سه نقطه منو ===== */
+.menu-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: #cbd5e1;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-btn:hover {
+    background: rgba(103, 92, 255, 0.15);
+    border-color: #675cff;
+}
+
+/* ===== منوی سه نقطه ===== */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 55px;
+    right: 0;
+    background: rgba(15, 20, 40, 0.98);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    padding: 8px;
+    min-width: 200px;
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    z-index: 100;
+}
+
+.dropdown-menu.active {
+    display: block;
+}
+
+.dropdown-menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    color: #cbd5e1;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 0.2s;
+    font-size: 14px;
+}
+
+.dropdown-menu a:hover {
+    background: rgba(103, 92, 255, 0.1);
+    color: #fff;
+}
+
+.dropdown-menu a i {
+    width: 20px;
+    color: #675cff;
+}
+
+.dropdown-menu .divider-menu {
+    height: 1px;
+    background: rgba(255,255,255,0.05);
+    margin: 4px 8px;
+}
+
+/* ===== منوی ارتباط ===== */
+.contact-menu {
+    display: none;
+    background: rgba(8, 16, 31, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 16px 18px;
+    margin-bottom: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    animation: slideDown 0.3s ease-out;
+}
+
+.contact-menu.active {
+    display: block;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.contact-menu .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    transition: 0.2s;
+    color: #cbd5e1;
+    text-decoration: none;
+}
+
+.contact-menu .contact-item:hover {
+    background: rgba(103, 92, 255, 0.08);
+}
+
+.contact-menu .contact-item i {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(103, 92, 255, 0.12);
+    border-radius: 50%;
+    color: #675cff;
+    font-size: 15px;
+}
+
+.contact-menu .contact-item .label {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.contact-menu .contact-item .value {
+    font-size: 13px;
+    color: #94a3b8;
+    direction: ltr;
+}
+
+.contact-menu .contact-item .copy-btn {
+    background: rgba(103, 92, 255, 0.15);
+    color: #675cff;
+    border: none;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-family: 'Vazirmatn', sans-serif;
+}
+
+.contact-menu .contact-item .copy-btn:hover {
+    background: rgba(103, 92, 255, 0.3);
+}
+
+.contact-menu .divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.05);
+    margin: 4px 0;
+}
+
+.contact-trigger-btn {
+    padding: 10px 16px;
+    background: linear-gradient(135deg, #675cff, #8b5cf6);
+    color: #fff !important;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 14px;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+    font-family: 'Vazirmatn', sans-serif;
+    box-shadow: 0 0 20px rgba(103, 92, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.contact-trigger-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 30px rgba(103, 92, 255, 0.5);
+}
+
+/* ===== دکمه سفارش ===== */
+.order-btn {
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #00f7ff, #00ff88);
+    color: #000 !important;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 16px;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+    font-family: 'Vazirmatn', sans-serif;
+    box-shadow: 0 0 30px rgba(0, 247, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.order-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 50px rgba(0, 247, 255, 0.5);
+}
+
+.order-btn i {
+    font-size: 20px;
+}
+
+/* ===== بخش خدمات ===== */
+.services-section {
+    margin: 15px 0 20px;
+}
+
+.services-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 900;
+    color: #e2e8f0;
+    margin-bottom: 15px;
+}
+
+.services-title span {
+    background: linear-gradient(135deg, #675cff, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.service-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 16px 18px;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.service-item:hover {
+    background: rgba(103, 92, 255, 0.05);
+    border-color: #675cff;
+    transform: translateX(4px);
+}
+
+.service-item .right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.service-item .icon {
+    font-size: 28px;
+}
+
+.service-item .name {
+    color: #e2e8f0;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.service-item .price {
+    color: #675cff;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+/* ===== بخش مهارت‌ها ===== */
+.skills-section {
+    margin: 15px 0 20px;
+}
+
+.skills-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: #e2e8f0;
+    margin-bottom: 12px;
+}
+
+.skills-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.skill-circle {
+    text-align: center;
+}
+
+.skill-circle .circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    color: #fff;
+    position: relative;
+    margin: 0 auto 5px;
+}
+
+.skill-circle .circle.html {
+    background: conic-gradient(#e44d26 0% 97%, rgba(255,255,255,0.1) 97% 100%);
+}
+.skill-circle .circle.css {
+    background: conic-gradient(#264de4 0% 95%, rgba(255,255,255,0.1) 95% 100%);
+}
+.skill-circle .circle.js {
+    background: conic-gradient(#f7df1e 0% 100%, rgba(255,255,255,0.1) 100% 100%);
+}
+
+.skill-circle .circle::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #0b0e14;
+    border-radius: 50%;
+}
+
+.skill-circle .circle span {
+    position: relative;
+    z-index: 1;
+}
+
+.skill-circle .label {
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+.divider{
+    height:1px;
+    background:rgba(255,255,255,0.06);
+    margin:20px 0;
+}
+
+/* ===== بخش نظرات ===== */
+.section-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:12px;
+    color: #e2e8f0;
+}
+
+.section-title h2{
+    font-size:18px;
+    font-weight: 700;
+}
+
+.comments{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.comment-box,
+.comment-list{
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:16px;
+    padding:15px;
+}
+
+.comment-box h3{
+    color: #e2e8f0;
+    font-size: 14px;
+}
+
+.comment-box textarea{
+    width:100%;
+    min-height:80px;
+    padding:12px;
+    resize:vertical;
+    border:1px solid rgba(255,255,255,0.06);
+    background:rgba(0,0,0,0.2);
+    color:var(--text);
+    border-radius:12px;
+    outline:none;
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 13px;
+}
+
+.comment-box textarea:focus {
+    border-color: #675cff;
+}
+
+.comment{
+    padding:10px 0;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+    color: #cbd5e1;
+}
+
+.comment:last-child{
+    border-bottom:0;
+}
+
+.comment strong{
+    display:block;
+    margin-bottom:4px;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+
+.comment span {
+    font-size: 13px;
+}
+
+.primary{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border-radius:12px;
+    color:white;
+    font-weight:bold;
+    background:linear-gradient(135deg, #675cff, #8b5cf6);
+    box-shadow:0 10px 25px rgba(103, 92, 255, 0.35);
+    border: none;
+    cursor: pointer;
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.primary:hover {
+    transform: scale(1.02);
+}
+
+/* ===== فوتر ===== */
+.footer-text {
+    text-align: center;
+    color: #64748b;
+    font-size: 12px;
+    padding: 15px 0 5px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    margin-top: 15px;
+}
+
+.footer-text span {
+    color: #675cff;
+}
+
+/* ===== تایید ===== */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: rgba(5, 8, 22, 0.95);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 16px;
+    font-weight: 500;
+    font-size: 15px;
+    border: 1px solid rgba(103, 92, 255, 0.3);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    z-index: 9999;
+    transition: 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ===== اسکرول ===== */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #675cff; border-radius: 20px; }
+
+@media (max-width: 420px) {
+    .container { padding: 14px; }
+    .logo { font-size: 16px; }
+    .service-item { padding: 12px 14px; }
+    .service-item .name { font-size: 13px; }
+    .service-item .price { font-size: 13px; }
+    .comments { grid-template-columns: 1fr; }
+    .menu-btn { width: 34px; height: 34px; font-size: 16px; }
+    .contact-trigger-btn { font-size: 13px; padding: 8px 14px; }
+    .order-btn { font-size: 14px; padding: 12px 16px; }
+    .skill-circle .circle { width: 60px; height: 60px; font-size: 14px; }
+    .skill-circle .circle::after { width: 42px; height: 42px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== PARTICLES CANVAS ===== -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- ===== کانتینر اصلی ===== -->
+<div class="container">
+
+    <!-- ===== هدر ===== -->
+    <div class="site-header">
+        <div class="header-left">
+            <button class="menu-btn" id="menuBtn">⋮</button>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="#" onclick="showToast('شماره تماس: ۰۹۳۷۲۹۶۰۵۱۸')"><i class="fas fa-phone"></i> تماس با ما</a>
+                <a href="#" onclick="showToast('نسخه ۱۲.۶ - آخرین بروزرسانی')"><i class="fas fa-info-circle"></i> درباره وب</a>
+                <div class="divider-menu"></div>
+                <a href="#" style="color:#64748b; font-size:12px;"><i class="fas fa-code"></i> ساخت توسط فجر ۱۲</a>
+            </div>
+        </div>
+        <div class="logo">گروه رسانه‌ای فجر ۱۲</div>
+        <div style="width:40px;"></div>
+    </div>
+
+    <!-- ===== دکمه سفارش ===== -->
+    <button class="order-btn" onclick="showToast('📞 برای سفارش با شماره ۰۹۳۷۲۹۶۰۵۱۸ تماس بگیرید')">
+        <i class="fas fa-shopping-cart"></i> همین حالا سفارش بده
+    </button>
+
+    <!-- ===== منوی ارتباط ===== -->
+    <button class="contact-trigger-btn" id="contactToggle">
+        <i class="fas fa-address-card"></i> ارتباط با ما
+    </button>
+
+    <div class="contact-menu" id="contactMenu">
+        <div class="contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <div style="flex:1;">
+                <div class="label">تلفن</div>
+                <div class="value" id="phoneNumber">۰۹۳۷۲۹۶۰۵۱۸</div>
+            </div>
+            <button class="copy-btn" onclick="copyPhone()">📋 کپی</button>
+        </div>
+        <div class="divider"></div>
+        <a href="mailto:valehhossein94@gmail.com" class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+                <div class="label">ایمیل</div>
+                <div class="value">valehhossein94@gmail.com</div>
+            </div>
+        </a>
+        <div class="divider"></div>
+        <a href="#" class="contact-item" onclick="showToast('آیدی ایتا: ehv_eitaa@')">
+            <i class="fas fa-comment"></i>
+            <div>
+                <div class="label">آیدی ایتا</div>
+                <div class="value">ehv_eitaa@</div>
+            </div>
+        </a>
+        <div class="divider"></div>
+        <a href="#" class="contact-item" onclick="if(navigator.share){navigator.share({title:'گروه رسانه‌ای فجر ۱۲', text:'گروه رسانه‌ای فجر ۱۲', url:window.location.href})}">
+            <i class="fas fa-share-alt"></i>
+            <div>
+                <div class="label">اشتراک‌گذاری</div>
+                <div class="value">ارسال لینک</div>
+            </div>
+        </a>
+    </div>
+
+    <!-- ===== بخش خدمات ===== -->
+    <div class="services-section">
+        <div class="services-title">خدمات <span>گروه رسانه‌ای فجر ۱۲</span></div>
+        <div class="services-grid">
+
+            <div class="service-item" style="border-right: 3px solid #675cff;">
+                <div class="right">
+                    <div class="icon">🌐</div>
+                    <div class="name">خدمات وب</div>
+                </div>
+                <div class="price"></div>
+            </div>
+
+            <div class="service-item">
+                <div class="right">
+                    <div class="icon">🛠</div>
+                    <div class="name">خدمات شخصی</div>
+                </div>
+                <div class="price">۲۰۰ هزار ت</div>
+            </div>
+
+            <div class="service-item">
+                <div class="right">
+                    <div class="icon">🛒</div>
+                    <div class="name">آنلاین شاپ</div>
+                </div>
+                <div class="price">۳۵۰ هزار ت</div>
+            </div>
+
+            <div class="service-item">
+                <div class="right">
+                    <div class="icon">🐙</div>
+                    <div class="name">گیت‌هاب حرفه‌ای</div>
+                </div>
+                <div class="price">۴۵۰ هزار ت</div>
+            </div>
+
+            <div class="service-item">
+                <div class="right">
+                    <div class="icon">📝</div>
+                    <div class="name">وردپرس حرفه‌ای</div>
+                </div>
+                <div class="price">۵۰۰ هزار ت</div>
+            </div>
+
+            <div class="service-item">
+                <div class="right">
+                    <div class="icon">🕌</div>
+                    <div class="name">وب مذهبی</div>
+                </div>
+                <div class="price">۱۰۰ هزار ت</div>
+            </div>
+
+            <div class="service-item">
+                <div class="right">
+                    <div class="icon">🔥</div>
+                    <div class="name">وب انقلابی</div>
+                </div>
+                <div class="price">۵۰ هزار ت</div>
+            </div>
+
+            <div class="service-item" style="border-right: 3px solid #8b5cf6; margin-top:5px;">
+                <div class="right">
+                    <div class="icon">📸</div>
+                    <div class="name">عکاسی و فیلم‌برداری</div>
+                </div>
+                <div class="price"></div>
+            </div>
+
+            <div class="service-item">
+                <div class="right">
+                    <div class="icon">📷</div>
+                    <div class="name">عکاسی حرفه‌ای (ساعتی)</div>
+                </div>
+                <div class="price">۵۰۰ ت</div>
+            </div>
+
+            <div class="service-item">
+                <div class="right">
+                    <div class="icon">🎥</div>
+                    <div class="name">فیلم‌برداری حرفه‌ای (ساعتی)</div>
+                </div>
+                <div class="price">۵۰۰ ت</div>
+            </div>
+
+            <div class="service-item" style="border-right: 3px solid #ec4899; margin-top:5px;">
+                <div class="right">
+                    <div class="icon">✂️</div>
+                    <div class="name">تدوین</div>
+                </div>
+                <div class="price"></div>
+            </div>
+
+            <div class="service-item">
+                <div class="right">
+                    <div class="icon">⚡</div>
+                    <div class="name">فوری (اینشات/کپ‌کات) ساعتی</div>
+                </div>
+                <div class="price">۲۵۰ ت</div>
+            </div>
+
+            <div class="service-item">
+                <div class="right">
+                    <div class="icon">🎬</div>
+                    <div class="name">حرفه‌ای (پریمیر) ساعتی</div>
+                </div>
+                <div class="price">۵۰۰ ت</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ===== بخش مهارت‌ها ===== -->
+    <div class="skills-section">
+        <div class="skills-title">مهارت‌های تیم</div>
+        <div class="skills-grid">
+            <div class="skill-circle">
+                <div class="circle html"><span>۹۷%</span></div>
+                <div class="label">HTML &amp; CSS</div>
+            </div>
+            <div class="skill-circle">
+                <div class="circle css"><span>۹۵%</span></div>
+                <div class="label">CSS</div>
+            </div>
+            <div class="skill-circle">
+                <div class="circle js"><span>۱۰۰%</span></div>
+                <div class="label">JavaScript</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ===== بخش نظرات ===== -->
+    <section class="section">
+        <div class="section-title">
+            <h2>💬 بازخورد کاربران</h2>
+        </div>
+        <div class="comments">
+            <div class="comment-box">
+                <h3>نظر خودت را بنویس</h3>
+                <br>
+                <textarea id="commentText" placeholder="نظرت درباره سایت چیست؟"></textarea>
+                <button class="primary" onclick="sendComment()">ارسال بازخورد</button>
+            </div>
+            <div class="comment-list" id="commentList">
+                <div class="comment">
+                    <strong>سیستم</strong>
+                    <span>به بخش نظرات خوش آمدید.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== فوتر ===== -->
+    <div class="footer-text">
+        ساخت توسط <span>فجر ۱۲</span> | نسخه ۱۲.۶
+    </div>
+
+</div>
+
+<!-- ===== تایید ===== -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== PARTICLES CANVAS =====
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+const particles = [];
+for (let i = 0; i < 80; i++) {
+    particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        size: Math.random() * 2 + 1
+    });
+}
+function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(103, 92, 255, 0.5)';
+        ctx.fill();
+    });
+    for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 120) {
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+                ctx.strokeStyle = `rgba(103, 92, 255, ${0.15 * (1 - dist / 120)})`;
+                ctx.stroke();
+            }
+        }
+    }
+    requestAnimationFrame(animateParticles);
+}
+animateParticles();
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+
+// ===== منوی سه نقطه =====
+const menuBtn = document.getElementById('menuBtn');
+const dropdownMenu = document.getElementById('dropdownMenu');
+
+menuBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    dropdownMenu.classList.toggle('active');
+});
+
+document.addEventListener('click', function(e) {
+    if (!dropdownMenu.contains(e.target) && e.target !== menuBtn) {
+        dropdownMenu.classList.remove('active');
+    }
+});
+
+// ===== منوی ارتباط =====
+const contactToggle = document.getElementById('contactToggle');
+const contactMenu = document.getElementById('contactMenu');
+
+contactToggle.addEventListener('click', function(e) {
+    e.stopPropagation();
+    contactMenu.classList.toggle('active');
+});
+
+document.addEventListener('click', function(e) {
+    if (!contactMenu.contains(e.target) && e.target !== contactToggle) {
+        contactMenu.classList.remove('active');
+    }
+});
+
+// ===== کپی شماره =====
+function copyPhone() {
+    const phone = document.getElementById('phoneNumber').textContent;
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(phone).then(() => {
+            showToast('✅ شماره تماس کپی شد!');
+        }).catch(() => {
+            fallbackCopy(phone);
+        });
+    } else {
+        fallbackCopy(phone);
+    }
+}
+
+function fallbackCopy(text) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+        document.execCommand('copy');
+        showToast('✅ شماره تماس کپی شد!');
+    } catch (e) {
+        showToast('❌ کپی نشد، دستی کپی کنید');
+    }
+    document.body.removeChild(textarea);
+}
+
+// ===== نظرات =====
+const STORAGE_KEY = 'fajr12_comments';
+let comments = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+function renderComments() {
+    const box = document.getElementById('commentList');
+    box.innerHTML = '';
+    if (comments.length === 0) {
+        box.innerHTML = `<div class="comment"><strong>سیستم</strong><span>هنوز نظری ثبت نشده است.</span></div>`;
+        return;
+    }
+    comments.forEach(c => {
+        box.innerHTML += `
+            <div class="comment">
+                <strong>${c.name}</strong>
+                <span>${c.text}</span>
+            </div>
+        `;
+    });
+}
+
+function sendComment() {
+    const text = document.getElementById('commentText').value.trim();
+    if (!text) {
+        showToast('⚠️ لطفاً متن نظر را وارد کنید.');
+        return;
+    }
+    comments.push({
+        id: Date.now(),
+        name: 'کاربر',
+        text: text
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
+    document.getElementById('commentText').value = '';
+    renderComments();
+    showToast('✅ نظر شما با موفقیت ثبت شد!');
+}
+
+// ===== تایید =====
+let toastTimer;
+
+function showToast(text) {
+    const toast = document.getElementById('toast');
+    toast.textContent = text;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
+}
+
+// ===== بارگذاری اولیه =====
+renderComments();
+</script>
+</body>
+</html>
